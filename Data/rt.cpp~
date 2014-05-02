@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include "AmericanPut.h"
+
+using namespace std;
+
+
+
+
+int main(int argc, char *argv[])
+{
+  /*
+   *t - expiration time
+   *s - stock price
+   *k - strike price
+   *n - height of binomial tree
+   *r - risk free rate of interest
+   *sigma - volatility
+   *q - dividend
+   */
+  double k = 150;
+  double r = .05;
+  double q = .02;
+  double sigma = .3;
+  double t = .5;
+  int n = 500;
+
+
+  double percentage;
+
+  
+  ofstream fs;
+  fs.open("rt.txt");
+  
+  for(q = 0; q <= .05; q += .05) {
+    for(sigma = .05; sigma <= .65; sigma += .6) {
+      for(r = .005; r <= .1; r += .001) {
+	for(t = .01; t <= 2; t += .01) {
+	  percentage = deltafinder(k,r,q,sigma,t,0,150,n);
+	  fs << q << "\t" << sigma << "\t" << r << "\t" << t << "\t" << percentage << endl;
+	  cout << "q:\t" << q << "\tsigma:\t" << sigma << "\tr:\t" << r << "\tt:\t" << t << "\tpercentage:\t" << percentage << endl;
+	}
+      }
+    }
+  }
+  
+  fs.close();
+
+
+
+  cout << "All finished." << endl;
+    
+  return 0;
+}
+
+
+
