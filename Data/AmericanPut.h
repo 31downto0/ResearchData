@@ -80,7 +80,7 @@ double deltafinder(double k, double r, double q, double sigma, double t, double 
 
 double quickPut(double s, double k, double r, double q, double t, double sigma, int n) {
 
-  if((s <= 1.5*sqrt(r) - 1) && (s <= 1/(sigma + 12 * q + .75) - 1.75)) {
+  if((((s - k) / k) <= 1.5*sqrt(r) - 1) && (((s - k) / k) <= 1/(sigma + 12 * q + .75) - 1.75)) {
     return k - s;
   } else {
     return AmericanPut(s,k,r,q,sigma,t,n);
